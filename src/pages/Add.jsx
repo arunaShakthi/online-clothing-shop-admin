@@ -16,12 +16,13 @@ const [description, setDescription] = useState('');
 const [price, setPrice] = useState('');
 const [category, setCategory] = useState('Men');
 const [subCategory, setSubCategory] = useState('Topwear');
-const [bestSeller, setBestSeller] = useState('false');
+const [bestSeller, setBestSeller] = useState("false");
 const [sizes, setSizes] = useState(["S","M","L","XL","XXL"]);
 
 
 const onSubmitHandler = async (e) =>{
   e.preventDefault()
+  
 
   try {
 
@@ -40,8 +41,9 @@ const onSubmitHandler = async (e) =>{
     image3 &&formData.append("image3", image3)
     image4 &&formData.append("image4", image4)
 
-    const response = await axios.post(backendUrl+"/api/product/add", formData,{headers:{token}})
 
+    const response = await axios.post(backendUrl+"/api/product/add", formData,{headers:{token}})
+    
     if (response.data.success) {
       toast.success(response.data.message)
       setName("")
@@ -51,6 +53,7 @@ const onSubmitHandler = async (e) =>{
       setImage3(false)
       setImage4(false)
       setPrice('')
+      setBestSeller(false)
     } else {
       toast.error(response.data.message)
     }
